@@ -9,9 +9,11 @@ import Checkout from '../components/checkout'
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    
+    <h1>Hi people</h1>
+    <p>Welcome to your new Gatsby e-commerce site.</p>
+   
     <Checkout />
-    <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
+    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
       <Image />
     </div>
    
