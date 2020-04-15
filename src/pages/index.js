@@ -1,20 +1,36 @@
 import React from 'react'
-
+import styled from 'styled-components'
 import Layout from '../components/layout'
-import Image from '../components/image'
 import SEO from '../components/seo'
 
-import Checkout from '../components/checkout'
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+ 
+`;
+
+const Wrapper = styled.section`
+  padding: 4em;
+  
+  height:100vh;
+
+`;
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    
-    <Checkout />
-    <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-   
+    <h1> Hi this is the title i guess</h1>
+      <Wrapper>
+        <Title>
+          Hello World!
+        </Title>
+      </Wrapper>
+      <Wrapper>
+        <Title>
+          again boy
+        </Title>
+      </Wrapper>
+
   </Layout>
 )
 

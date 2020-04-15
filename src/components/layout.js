@@ -1,55 +1,56 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
-
-import Header from './header'
-import './layout.css'
-import stripeLogo from '../images/powered_by_stripe.svg'
-
+import Navbar from "./Navabar/Navbar.js"
+import { animated, useSpring } from 'react-spring';
 import '@stripe/stripe-js' // https://github.com/stripe/stripe-js#import-as-a-side-effect
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Header  />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
-          {children}
-          <footer>
-            <div>
-              © 2019, Built by <a href="https://twitter.com/thorwebdev">Thor</a>{' '}
-              with <a href="https://www.gatsbyjs.org">Gatsby</a>
-            </div>
-            <div>
-              <a href="https://stripe.com">
-                <img src={stripeLogo} alt="Payments powered by Stripe" />
-              </a>
-            </div>
-          </footer>
-        </div>
-      </>
-    )}
-  />
-)
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+const calc = o => `translateY(${o * 0.1}px)`;
+
+const Layout = ({children}) => {
+  const ref = useRef();
+  const [{ offset }, set] = useSpring(() => ({ offset: 0 }));
+
+  const handleScroll = () => {
+    const posY = ref.current.getBoundingClientRect().top;
+    const offset = window.pageYOffset - posY;
+    set({ offset });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  return (
+    <body ref={ref}>
+          <div
+          style={{
+            background: "#123456",
+            position: "relative",
+            width: "100vw",
+            height: "400px"
+          }}>
+              <animated.div
+            style={{
+              background: "#654321",
+              position: "absolute",
+              width: "100%",
+              height: "100px",
+              top: 0,
+              left: 0,
+              transform: offset.interpolate(calc)
+            }}
+          >{children}</animated.div>
+          </div>
+        
+        </body>
+      
+  );
+};
 
 export default Layout
