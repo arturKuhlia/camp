@@ -1,56 +1,54 @@
-import React, { useEffect, useRef } from 'react'
-import PropTypes from 'prop-types'
-import { StaticQuery, graphql } from 'gatsby'
+import React  from 'react'
 import Navbar from "./Navabar/Navbar.js"
-import { animated, useSpring } from 'react-spring';
-import '@stripe/stripe-js' // https://github.com/stripe/stripe-js#import-as-a-side-effect
+ import Parallax from 'react-springy-parallax'
+ import Animated from 'animated/lib/targets/react-dom'
+ import Easing from 'animated/lib/Easing'
 
-
-const calc = o => `translateY(${o * 0.1}px)`;
-
+import "./layout.css"
+import bgSVG from "./../images/bg.svg"
 const Layout = ({children}) => {
-  const ref = useRef();
-  const [{ offset }, set] = useSpring(() => ({ offset: 0 }));
+   
+         
+        return (
+            <body style={{overflow: "hidden"}} >
+                 <Navbar style={{position:"sticky", top: "0"}} />
+           
+           
+                 <Parallax  pages={4}   
+    effect={(animation, toValue) =>
+    Animated.timing(animation, { toValue, duration: 0 })}
+        >
+          
+                    <Parallax.Layer
+                            tension={0}
+                            offset={0}
+                            speed={-0.7}
+                           style={{ position: 'absolute' }}
+                            >
+                   
+                         <img src={bgSVG} style={{ maxHeight: "200vh", winWidth:"100vw"}}/>
+                   
+                     </Parallax.Layer>
+                     
+                     
+            <Parallax.Layer
+                    offset={0}
+                    speed={0.1}
+                    >
+                   {children}
+                </Parallax.Layer>
+               </Parallax>
+             
+            
+            
+            
+            
+            </body>
+            )
+    }
+ 
 
-  const handleScroll = () => {
-    const posY = ref.current.getBoundingClientRect().top;
-    const offset = window.pageYOffset - posY;
-    set({ offset });
-  };
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+export default Layout;
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-
-  return (
-    <body ref={ref}>
-          <div
-          style={{
-            background: "#123456",
-            position: "relative",
-            width: "100vw",
-            height: "400px"
-          }}>
-              <animated.div
-            style={{
-              background: "#654321",
-              position: "absolute",
-              width: "100%",
-              height: "100px",
-              top: 0,
-              left: 0,
-              transform: offset.interpolate(calc)
-            }}
-          >{children}</animated.div>
-          </div>
-        
-        </body>
-      
-  );
-};
-
-export default Layout
+ 

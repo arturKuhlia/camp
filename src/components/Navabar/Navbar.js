@@ -6,26 +6,21 @@ import NavbarLinks from "./NavbarLinks"
 import Logo from "./Logo"
 
 const Navigation = styled.nav`
-  height: 10vh;
   display: flex;
-  background-color: #fff;
-  position: relative;
+  position: fixed;
   justify-content: space-between;
   text-transform: uppercase;
-  border-bottom: 2px solid #33333320;
   margin: 0 auto;
   padding: 0 5vw;
-  z-index: 2;
+  z-index: 200;
   align-self: center;
-
-  @media (max-width: 768px) {
-    position: sticky;
+ color: black;
     height: 8vh;
     top: 0;
     left: 0;
     right: 0;
     left: 0;
-  }
+  
 `
 
 const Toggle = styled.div`
