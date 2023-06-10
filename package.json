@@ -7,7 +7,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.0.1",
     "babel-plugin-styled-components": "^1.10.7",
-    "gatsby": "^2.19.19",
+    "gatsby": "^4.25.7",
     "gatsby-image": "^2.2.41",
     "gatsby-plugin-manifest": "^2.2.41",
     "gatsby-plugin-offline": "^2.2.10",
